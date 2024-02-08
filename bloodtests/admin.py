@@ -1,5 +1,6 @@
+"""Module to register models to Django admin."""
+
 from django.contrib import admin
-from .models import Test, TestResult
+from .models import Test
 
 admin.site.register(Test)
-admin.site.register(TestResult)

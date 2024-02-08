@@ -105,7 +105,8 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     ),
-    'EXCEPTION_HANDLER': 'exceptions.custom_drf_exception_handler'
+    # 'EXCEPTION_HANDLER': 'exceptions.custom_drf_exception_handler'
+    "EXCEPTION_HANDLER": 'bloodtests.exceptions.base_exception_handler',
 }
 
 # Internationalization
