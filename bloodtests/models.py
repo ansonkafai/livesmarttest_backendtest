@@ -11,3 +11,16 @@ class Test(models.Model):
     unit = models.CharField(max_length=10)
     lower = models.FloatField(null=True, blank=True)
     upper = models.FloatField(null=True, blank=True)
+
+    @property
+    def ideal_range(self):
+        """Render the derived field 'ideal_range' based on lower and upper values.
+        """
+        if self.lower and self.upper:
+            return f"{self.lower} <= value <= {self.upper}"
+        elif self.lower is None and self.upper:
+            return f"value <= {self.upper}"
+        elif self.lower and self.upper is None:
+            return f"value >= {self.lower}"
+        else:
+            return ""
