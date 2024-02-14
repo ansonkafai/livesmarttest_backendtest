@@ -12,25 +12,10 @@ class TestSerializer(serializers.ModelSerializer):
     Serializer class replicates a lot of information that's also contained in the model,
     so we use ModelSerializer class to simplify and keep the code DRY.
     """
-    # SerializerMethodField will find the method based on this pattern: get_<attribute name>()
-    ideal_range = serializers.SerializerMethodField()
 
     class Meta:
         model = Test
-        # Either define the 'fields' or the 'exclude' attribute to indicate the involved fields of the model.
-        exclude = []
-
-    def get_ideal_range(self, obj):
-        """Render the derived field 'ideal_range' based on lower and upper values.
-        """
-        if obj.lower and obj.upper:
-            return f"{obj.lower} <= value <= {obj.upper}"
-        elif obj.lower is None and obj.upper:
-            return f"value <= {obj.upper}"
-        elif obj.lower and obj.upper is None:
-            return f"value >= {obj.lower}"
-        else:
-            return ""
+        fields = ("code", "name", "unit", "lower", "upper", "ideal_range",)
 
     def validate(self, data):
         """Validate object level data.
